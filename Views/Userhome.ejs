@@ -1,0 +1,78 @@
+<%-include('Header')-%>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-0  ">
+        <div class="container-fluid bg-info height">
+          <a class="navbar-brand fw-bold font-monospace text-white" href="#"><%=locals.user?user:"USER"%></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+               -->
+            </ul>
+            <form class="d-flex" role="search" action="/signout">
+              <button class="btn btn-outline-success text-white" type="submit">Sign Out</button>
+            </form>
+          </div>
+        </div>
+    </nav>
+	<div id="main">
+		<h1>TIC TAC TOE</h1>
+		<p class="text-info">
+			Game starts by just Tap on
+			box<br><br>
+		</p>
+		<br><br>
+		<div class = "ui">
+			<div class="d-flex">
+				<input type="text" id= "b1"
+					class="cell" onclick="myfunc_3(); myfunc();"
+					readonly>
+				<input type="text" id= "b2"
+					class="cell" onclick="myfunc_4(); myfunc();"
+					readonly>
+				<input type="text" id= "b3" class="cell"
+					onclick="myfunc_5(); myfunc();"
+					readonly>
+			</div>
+			<div class="d-flex">
+				<input type="text" id= "b4"
+					class="cell" onclick="myfunc_6(); myfunc();"
+					readonly>
+				<input type="text" id= "b5"
+					class="cell" onclick="myfunc_7(); myfunc();"
+					readonly>
+				<input type="text" id= "b6"
+					class="cell" onclick="myfunc_8(); myfunc();"
+					readonly>
+			</div>
+			<div class="d-flex">
+				<input type="text" id= "b7"
+					class="cell" onclick="myfunc_9(); myfunc();"
+					readonly>
+				<input type="text" id= "b8"
+					class="cell" onclick="myfunc_10();myfunc();"
+					readonly>
+				<input type="text" id= "b9"
+					class="cell" onclick="myfunc_11();myfunc();"
+					readonly>
+			</div>
+		</div>
+		<br><br><br>
+		
+		<button id="but" onclick="myfunc_2()">
+			RESET
+		</button>
+		<br><br>
+		<p id="print"></p>
+	</div>
+
+
+<%-include('footer')-%>
+
