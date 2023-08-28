@@ -1,16 +1,20 @@
 const mongoose=require("mongoose");
 
 
-mongoose.connect("mongodb://localhost:27017/Mini")
+mongoose.connect("mongodb://0.0.0.0:27017/Mini", { useNewUrlParser: true, useUnifiedTopology: false })
 .then(()=>{
     console.log("DB connected......");
 })
-.catch(()=>{
-    console.log("Not connected....");
+.catch(err=>{
+    console.log("Not connected....",err);
 })
 
 const loginSchema=mongoose.Schema({
     name:{
+        type:String,
+        required:true
+    },
+    email:{
         type:String,
         required:true
     },
