@@ -10,6 +10,12 @@
           >
             <div class="card-body p-5 text-center">
               <div class="mt-md-4">
+                <% if(errmsg) {%>
+                  <div id="errorDiv" class="alert alert-danger">
+                    <strong><%=errmsg%>
+                    </strong>
+                  </div>
+                <%}%>
                 <h2 class="log-shadow fw-bold mb-4 text-uppercase">Login</h2>
                 <form action="/login" method="POST">
                   <br>

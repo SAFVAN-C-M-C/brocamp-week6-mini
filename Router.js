@@ -2,6 +2,7 @@ const express=require("express");
 const router = express.Router();
 const register=require("./mongoose");
 const { render } = require("ejs");
+const { ObjectId } = require('mongodb')
 const session = require("express-session");
 
 
@@ -111,10 +112,10 @@ router.post("/adminlog",(req,res)=>{
         req.session.adminlog=true;
         res.redirect('/admin_home');
     }else{
-        if(req.body.email!=credential.email){
+        if(req.body.userID!=admin.userID){
             res.render('adminlogin',{title:'login',errmsg:'user not exist'});
         }
-        else if(req.body.password != credential.password){
+        else if(req.body.password != admin.password){
             res.render('adminlogin',{title:'login',errmsg:'incorrect password'});
         }
         else{
@@ -124,10 +125,66 @@ router.post("/adminlog",(req,res)=>{
 });
 
 
-router.get('/admin_home',(req,res)=>{
-    res.render('admin',{title:'Home',user:req.session.user})
+router.get('/admin_home',async(req,res)=>{
+    var i=0;
+    const userdata=await register.find({},{__v:0})
+    res.render('admin',{title:'Home',user:req.session.user,userdata,i})
 })
 
+
+
+//edit
+router
+.route("/edit/:id")
+.get(async(req,res)=>{
+    const id=req.params.id;
+    const data = await register.findOne({ _id: new ObjectId(id) });
+    res.render('edit',{title:'update',data});
+})
+.post(async(req,res)=>{
+    const id=req.params.id;
+    const data=req.body
+    await register.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: { name: data.name, email: data.email } }
+      );
+    res.redirect("/admin_home")
+
+})
+
+
+router.route('/add')
+.get((req,res)=>{
+    res.render('add',{title:'add user'})
+})
+.post(async(req,res)=>{
+    const data={
+        name:req.body.name,
+        email:req.body.email,
+        password:req.body.password
+    }
+    console.log(data);
+    await register.insertMany([data]);
+    res.redirect("/admin_home")
+})
+
+router.post('/search',async(req,res)=>{
+    var i=0;
+    const data=req.body
+    console.log(data);
+    let userdata = await register.find({name: { $regex: data.search, $options: 'i' }});
+    console.log(`Search Data ${userdata} `);
+    res.render('admin',{title:'Home',user:req.session.user,userdata,i})
+})
+
+
+router.get("/delete/:id",async(req,res)=>{
+    const id=req.params.id;
+
+    let deleted = await register.deleteOne({ _id: new ObjectId(id) });
+
+    res.redirect('/admin_home')
+})
 
 router.get('/signout',(req,res)=>{
     req.session.destroy((err)=>{

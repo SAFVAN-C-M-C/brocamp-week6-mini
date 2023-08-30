@@ -424,3 +424,25 @@ function myfunc_11() {
 		flag = 1;
 	}
 }
+
+
+
+
+
+
+
+
+
+// credential error 
+
+var errorDiv = document.getElementById("errorDiv");
+
+  // Function to hide the error div
+  function hideErrorDiv() {
+    if (errorDiv) {
+      errorDiv.style.display = "none";
+    }
+  }
+
+  // Set a timeout to hide the error div after 5 seconds
+  setTimeout(hideErrorDiv, 5000);

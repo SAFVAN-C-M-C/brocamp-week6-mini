@@ -10,27 +10,31 @@
           >
             <div class="card-body p-5 text-center">
               <div class="mt-md-4">
-                <% if(errmsg) {%>
-                  <div id="errorDiv" class="alert alert-danger">
-                    <strong><%=errmsg%>
-                    </strong>
-                  </div>
-                <%}%>
-                <h2 class="log-shadow fw-bold mb-4 text-uppercase">Hello there Admin</h2>
-                <form action="/adminlog" method="POST">
-                  <br>
+                <h2 class="fw-bold mb-2 text-uppercase">Update USER</h2>
+                <form action="/edit/<%-data._id%>" method="POST">
                   <div class="form-outline form-primary mb-4">
                     <input
-                      name="userID"
+                      name="name"
                       type="text"
-                      id="userIDX"
+                      id="typeTextX"
                       class="form-control form-control-lg"
-                      placeholder="User ID"
+                      placeholder="Full Name"
+                      value="<%=data.name%>"
                       required
                     />
                   </div>
-                  <br>
-                  <div class="form-outline form-white mb-4">
+                  <div class="form-outline form-primary mb-4">
+                    <input
+                      name="email"
+                      type="email"
+                      id="typeEmailX"
+                      class="form-control form-control-lg"
+                      placeholder="Email"
+                      value="<%=data.email%>"
+                      required
+                    />
+                  </div>
+                  <!-- <div class="form-outline form-white mb-4">
                     <input
                     name="password"
                       type="password"
@@ -39,17 +43,12 @@
                       placeholder="Password"
                       required
                     />
-                  </div>
+                  </div> -->
                   <br />
                   <br />
                   <button class="btn btn-outline-light btn-lg px-5" type="submit">
-                    Login
+                    Save
                   </button>
-                  <br>
-                  <br>
-                  <div >
-                    <a class="text-light no-under" href="/">User login</a>
-                  </div>
                 </form>
               </div>
             </div>
