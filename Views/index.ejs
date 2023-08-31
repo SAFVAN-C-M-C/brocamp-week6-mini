@@ -10,7 +10,8 @@
           >
             <div class="card-body p-5 text-center">
               <div class="mt-md-4">
-                <% if(errmsg) {%>
+                <!-- <%=locals.errmsg?errmsg:"USER"%> -->
+                <% if(locals.errmsg) {%>
                   <div id="errorDiv" class="alert alert-danger">
                     <strong><%=errmsg%>
                     </strong>

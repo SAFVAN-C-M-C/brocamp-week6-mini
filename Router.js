@@ -23,7 +23,7 @@ router.get('/',(req,res)=>{
     else if(req.session.adminlog){
         res.redirect("/admin_home");
     }else{
-        res.render('index',{title:'login',errmsg:null}); 
+        res.render('index',{title:'login',errmsg:req.session.errmsg}); 
     }
  
 });
@@ -44,16 +44,7 @@ router.post('/Signup',async (req,res)=>{
     console.log(data);
     await register.insertMany([data]);
     res.redirect("/");
-//     const newUser = new register(data);
-//     newUser.save()
-//   .then(user => {
-//     console.log('User saved:', user);
 
-//   })
-//   .catch(err => {
-//     console.error('Error saving user:', err);
-//     res.render('Signup')
-//   });
 });
 
 
@@ -73,12 +64,14 @@ try{
         return res.redirect("/User");
     }
     else{
-        res.render('index',{title:'login',errmsg:"invalid password"});
+        req.session.errmsg="invalid password"
+        res.redirect('/')
         console.log("invalid password");
 
     }
 }catch{
-res.render("index",{title:'login',errmsg:"user not found"})
+    req.session.errmsg="user not found"
+res.redirect('/')
 console.log("user not found");
 
 }
@@ -88,7 +81,12 @@ console.log("user not found");
 
 
 router.get('/User',(req,res)=>{
-    res.render('Userhome',{title:'Home',user:req.session.name});
+    if(req.secure.logged){
+        res.render('Userhome',{title:'Home',user:req.session.name});
+    }
+    else{
+        res.redirect('/');
+    }
 });
 
 
@@ -126,9 +124,14 @@ router.post("/adminlog",(req,res)=>{
 
 
 router.get('/admin_home',async(req,res)=>{
-    var i=0;
+    if(req.session.adminlog){
+        var i=0;
     const userdata=await register.find({},{__v:0})
     res.render('admin',{title:'Home',user:req.session.user,userdata,i})
+    }
+    else{
+        res.redirect('/admin')
+    }
 })
 
 
@@ -137,9 +140,13 @@ router.get('/admin_home',async(req,res)=>{
 router
 .route("/edit/:id")
 .get(async(req,res)=>{
-    const id=req.params.id;
+    if(req.session.adminlog){
+        const id=req.params.id;
     const data = await register.findOne({ _id: new ObjectId(id) });
     res.render('edit',{title:'update',data});
+    }else{
+        res.redirect('/admin')
+    }
 })
 .post(async(req,res)=>{
     const id=req.params.id;
@@ -155,7 +162,12 @@ router
 
 router.route('/add')
 .get((req,res)=>{
-    res.render('add',{title:'add user'})
+    if(req.session.adminlog){
+        res.render('add',{title:'add user'})
+    }else{
+        res.redirect('/admin')
+
+    }
 })
 .post(async(req,res)=>{
     const data={
@@ -172,7 +184,7 @@ router.post('/search',async(req,res)=>{
     var i=0;
     const data=req.body
     console.log(data);
-    let userdata = await register.find({name: { $regex: data.search, $options: 'i' }});
+    let userdata = await register.find({name: { $regex: "^" + data.search, $options: 'i' }});
     console.log(`Search Data ${userdata} `);
     res.render('admin',{title:'Home',user:req.session.user,userdata,i})
 })
