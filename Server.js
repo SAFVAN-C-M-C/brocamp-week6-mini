@@ -1,13 +1,14 @@
 const express=require("express");
 const app=express();
 const router=require("./Router");
+const admin_router=require("./Admin_router");
 const path=require("path");
 const session = require("express-session");
 const { v4: uuidv4 } = require("uuid");
 const nocache=require("nocache");
 
 
-const port=4000;
+const port=5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +32,7 @@ app.use(
   );
   
 app.use("/", router);
+app.use("/", admin_router);
 
 
 app.listen(port, () => {

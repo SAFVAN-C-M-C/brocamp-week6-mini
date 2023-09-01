@@ -10,6 +10,12 @@
           >
             <div class="card-body p-5 text-center">
               <div class="mt-md-4">
+                <% if(locals.errmsg) {%>
+                  <div id="errorDiv" class="alert alert-danger">
+                    <strong><%=errmsg%>
+                    </strong>
+                  </div>
+                <%}%>
                 <h2 class="fw-bold mb-2 text-uppercase">ADD USER</h2>
                 <form action="/add" method="POST">
                   <div class="form-outline form-primary mb-4">
