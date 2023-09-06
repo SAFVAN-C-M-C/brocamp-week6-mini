@@ -1,6 +1,7 @@
 <%-include('Header')-%>
+<body id="admin-body">
 <nav class="navbar navbar-expand-lg bg-body-tertiary p-0  ">
-    <div class="container-fluid bg-info height">
+    <div class="container-fluid bg-custom-nav height">
       <a class="navbar-brand fw-bold font-monospace text-white" href="#"><%=locals.user?user:"USER"%></a>
       <!-- <form class="d-flex" role="search" action="/signout">
         <button class="btn btn-outline-success text-white" type="submit">Sign Out</button>
@@ -9,12 +10,12 @@
         <lord-icon
         src="https://cdn.lordicon.com/moscwhoj.json"
         trigger="hover"
-        colors="primary:#121331,secondary:#08a88a"
+        colors="primary:#fff,secondary:#fff"
         style="width:60px;height:60px">
       </lord-icon></a>
     </div>
 </nav>
-<main class="index pt-5">
+<main class="index pt-5 bg-main">
   <!-- <div class="container search"> -->
 
   <div class="option d-flex align-items-center justify-content-around ">
@@ -22,15 +23,14 @@
         <div class="input-group">
           <div class="form-outline d-flex p-3">
             <input type="search" class="form-control " name="search" placeholder="Search">
-                <button id="search-button" type="submit" class="btn btn-primary mx-2">
+                <button id="search-button" type="submit" class="btn btn-primary bg-custom-nav mx-2" style="background-color: rgba(9,9,121,1);">
                   
-<lord-icon
-    src="https://cdn.lordicon.com/xfftupfv.json"
-    trigger="hover"
-    colors="primary:#fff"
-    style="width:25px;height:25px"
-    >
-</lord-icon>
+                  <lord-icon
+                  src="https://cdn.lordicon.com/rlizirgt.json"
+                  trigger="hover"
+                  colors="primary:#ffffff"
+                  style="width:25px;height:25px">
+              </lord-icon>
                 </button>
           </div>
           
@@ -39,7 +39,7 @@
       <a href="/add"><lord-icon
         src="https://cdn.lordicon.com/mrdiiocb.json"
         trigger="hover"
-        colors="primary:#4030e8"
+        colors="primary:#090979"
         style="width:40px;height:40px">
     </lord-icon></a>
   </div>

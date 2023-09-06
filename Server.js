@@ -8,7 +8,7 @@ const { v4: uuidv4 } = require("uuid");
 const nocache=require("nocache");
 
 
-const port=5000;
+const port=process.env.PORT||5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

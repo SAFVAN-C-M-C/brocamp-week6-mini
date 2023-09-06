@@ -1,7 +1,7 @@
 <%-include('Header')-%>
-
+<body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0  ">
-        <div class="container-fluid bg-info height">
+        <div class="container-fluid bg-custom-nav height">
           <a class="navbar-brand fw-bold font-monospace text-white" href="#"><%=locals.user?user:"USER"%></a>
           <!-- <form class="d-flex" role="search" action="/signout">
 			
@@ -11,7 +11,7 @@
 		  <a href="/signout"><lord-icon
 			src="https://cdn.lordicon.com/moscwhoj.json"
 			trigger="hover"
-			colors="primary:#121331,secondary:#08a88a"
+			colors="primary:#fff,secondary:#fff"
 			style="width:60px;height:60px">
 		</lord-icon></a>
           
@@ -19,7 +19,7 @@
     </nav>
 	<div id="main">
 		<h1>TIC TAC TOE</h1>
-		<p class="text-info">
+		<p class="text-custom">
 			Game starts by just Tap on
 			box<br><br>
 		</p>
@@ -61,11 +61,11 @@
 		</div>
 		<br><br><br>
 		
-		<button id="but" onclick="myfunc_2()">
+		<button id="but" class="text-custom reset" onclick="myfunc_2()">
 			RESET
 		</button>
 		<br><br>
-		<p id="print"></p>
+		<p id="print" class="text-custom"></p>
 	</div>
 
 

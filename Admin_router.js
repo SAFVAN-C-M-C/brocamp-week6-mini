@@ -5,14 +5,14 @@ const { render } = require("ejs");
 const { ObjectId } = require('mongodb')
 const session = require("express-session");
 
-
+//admin
 const admin={
     Name:"Safvan",
     userID:"BCK129",
     password:"1234",
 }
 
-
+//admin login
 adminrouter.get("/admin",(req,res)=>{
     if(req.session.adminlog){
         res.redirect("/admin_home");
@@ -20,8 +20,7 @@ adminrouter.get("/admin",(req,res)=>{
         res.render("adminlogin",{title:'login',errmsg:null})
     }
 })
-
-
+//admin login process
 adminrouter.post("/adminlog",(req,res)=>{
     if(req.body.userID===admin.userID && req.body.password === admin.password){
         req.session.user=admin.Name;
@@ -40,7 +39,7 @@ adminrouter.post("/adminlog",(req,res)=>{
     }
 });
 
-
+//admin home
 adminrouter.get('/admin_home',async(req,res)=>{
     if(req.session.adminlog){
         var i=0;
@@ -77,7 +76,7 @@ adminrouter
 })
 
 
-
+//add
 adminrouter.route('/add')
 .get((req,res)=>{
     if(req.session.adminlog){
@@ -111,6 +110,9 @@ adminrouter.route('/add')
 }
 });
 
+
+
+//search
 adminrouter.post('/search',async(req,res)=>{
     var i=0;
     const data=req.body
@@ -121,6 +123,9 @@ adminrouter.post('/search',async(req,res)=>{
 })
 
 
+
+
+//delete
 adminrouter.get("/delete/:id",async(req,res)=>{
     const id=req.params.id;
 

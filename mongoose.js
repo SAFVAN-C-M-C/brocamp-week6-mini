@@ -1,7 +1,10 @@
 const mongoose=require("mongoose");
+const dotenv=require("dotenv")
+dotenv.config({path:'config.env'})
 
 
-mongoose.connect("mongodb://0.0.0.0:27017/Mini", { useNewUrlParser: true, useUnifiedTopology: false })
+
+mongoose.connect(process.env.MongoUri, { useNewUrlParser: true, useUnifiedTopology: false })
 .then(()=>{
     console.log("DB connected......");
 })
@@ -16,6 +19,7 @@ const loginSchema=mongoose.Schema({
     },
     email:{
         type:String,
+        unique:true,
         required:true
     },
     password:{
